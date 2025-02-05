@@ -29,10 +29,16 @@ div{
     width: calc(0.75 * 100vh);
 }
 
+#input-history{
+    width: 94%;
+    height: 7%;
+    margin-top: 3%;
+}
+
 #output-frame{
-    height: 10%;
-    width: 90%;
-    margin-top: 5%;
+    height: 7%;
+    width: 94%;
+    margin-top: 3%;
 }
 
 #input-frame{
@@ -42,8 +48,8 @@ div{
     align-items: center;
     justify-content: center;
     height: 75%;
-    width: 90%;
-    margin-top: 10%;
+    width: 94%;
+    margin-top: 5%;
 }
 
 .buttons{
