@@ -1,7 +1,6 @@
 const inputFrame = document.querySelector("#input-frame");
 const outputFrame = document.querySelector("#output-frame");
 
-
 const buttonText = [
     "", "+/-", "%", "/",
      "7", "8", "9", "*", 
@@ -9,6 +8,14 @@ const buttonText = [
      "1", "2", "3", "+",
      "AC", "0", ",", "="
 ];
+
+const calculatorFunctions = {
+    "+": (num1, num2) => num1 + num2,
+    "-": (num1, num2) => num1 - num2,
+    "*": (num1, num2) => num1 * num2,
+    "/": (num1, num2) => num1 / num2,
+    "%": (num1, num2) => num1 % num2,
+}
 
 const createInputButtons = (numOfButtons) => {
     for(let i = 0; i < numOfButtons; i++){
@@ -27,6 +34,12 @@ const nameInputButtons = () => {
     
 };
 
+const operate = (num1, operator, num2) => {
+    const calc = calculatorFunctions[operator](num1, num2);
+    outputFrame.innerText = calc;
+}
+
 createInputButtons(20);
 nameInputButtons();
+operate(3, "+", 5);
 
