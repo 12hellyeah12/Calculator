@@ -9,8 +9,7 @@ const buttonText = [
      "1", "2", "3", "+",
      "AC", "0", ".", "="
 ];
-
-const operators = ["%", "/", "*", "-", "+", "="];
+const operators = ["%", "/", "*", "-", "+"];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const calculatorFunctions = {
@@ -62,8 +61,13 @@ const executeCalculation = () => {
 }
 
 const checkForCorrectInput = (input) => {
-    const doubleOperatorRegex = /^\d+[+]\d+$/; 
-    return doubleOperatorRegex.test(input.innerText);
+    const doubleOperatorRegex = /^\d+[%+-/*]\d+$/; 
+    const replaceLastOperatorRegex = /^\d+[%+-/*]$/; 
+    if(doubleOperatorRegex.test(input.innerText)){
+        return 2;
+    } else if(replaceLastOperatorRegex.test(input.innerText)){
+        return 3;
+    }
 };
 
 createInputButtons(20);
@@ -76,11 +80,19 @@ buttons.forEach(button => {
         });
     } else if(operators.includes(button.id)){
         button.addEventListener("click", () => {
-        if(checkForCorrectInput(outputFrame)){
+        if(checkForCorrectInput(outputFrame) === 2){
             executeCalculation();
+        } else if(checkForCorrectInput(outputFrame) === 3){
+            const stringToArray = outputFrame.innerText.split("");
+            stringToArray.pop();
+            outputFrame.innerText = stringToArray.join("");
         }
         outputFrame.innerText += button.value;
         });
+    } else if(button.id === "="){
+        button.addEventListener("click", () => executeCalculation());
+    } else if(button.id === "AC"){
+        button.addEventListener("click", () => resetCalculator());
     }
 })
 
