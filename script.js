@@ -10,6 +10,9 @@ const buttonText = [
      "AC", "0", ".", "="
 ];
 
+const operators = ["%", "/", "*", "-", "+", "="];
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 const calculatorFunctions = {
     "+": (num1, num2) => num1 + num2,
     "-": (num1, num2) => num1 - num2,
@@ -21,7 +24,7 @@ const calculatorFunctions = {
 const createInputButtons = (numOfButtons) => {
     for(let i = 0; i < numOfButtons; i++){
         inputFrame.innerHTML += 
-        `<button class ="buttons" id="button${i}" type="button"></button>`;
+        `<button class ="buttons" type="button"></button>`;
     }
 
     return buttons = document.querySelectorAll(".buttons");
@@ -58,22 +61,26 @@ const executeCalculation = () => {
     operate(numberOne, operator, numberTwo);
 }
 
+const checkForCorrectInput = (input) => {
+    const doubleOperatorRegex = /^\d+[+]\d+$/; 
+    return doubleOperatorRegex.test(input.innerText);
+};
+
 createInputButtons(20);
 nameInputButtons();
-//operate(3, "+", 5);
 
-// adds function to buttons 0-9
-buttons.forEach((button) => {
-    if(button.id === "AC") {
+buttons.forEach(button => {
+    if(numbers.includes(button.id)){
         button.addEventListener("click", () => {
-            resetCalculator();
+            outputFrame.innerText += button.value;
         });
-    } else if(button.id === "="){
+    } else if(operators.includes(button.id)){
         button.addEventListener("click", () => {
+        if(checkForCorrectInput(outputFrame)){
             executeCalculation();
+        }
+        outputFrame.innerText += button.value;
         });
-    } else {
-        button.addEventListener("click", () => outputFrame.innerText += button.value);
-    } 
-});
+    }
+})
 
