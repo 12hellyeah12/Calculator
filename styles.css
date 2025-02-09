@@ -27,6 +27,8 @@ div{
     align-items: center;
     height: 100vh;
     width: calc(0.75 * 100vh);
+    background-color: black;
+    border-radius: 5%;
 }
 
 #input-history{
@@ -39,6 +41,10 @@ div{
     height: 7%;
     width: 94%;
     margin-top: 3%;
+    color: white;
+    font-weight: bold;
+    font-size: 4rem;
+    text-align: right;
 }
 
 #input-frame{
@@ -53,7 +59,21 @@ div{
 }
 
 .buttons{
-    border: 1px solid green;
+    font-size: 4rem;
+    border-radius: 5%;
     width: calc(100% / 4);
     height: calc(100% / 5);
+}
+
+#btn-modulo, #btn-division, #btn-multiplication, #btn-substraction, #btn-addition{
+    background-color: orange;
+}
+
+#btn-modulo:active, #btn-division:active, #btn-multiplication:active, #btn-substraction:active, #btn-addition:active{
+    background-color: #ff8c00;
+}
+
+#btn-empty{
+    background-color: transparent;
+    border: none;
 }
