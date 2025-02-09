@@ -9,6 +9,15 @@ const buttonText = [
      "1", "2", "3", "+",
      "AC", "0", ".", "="
 ];
+
+const buttonIdentification = [
+    "empty", "pos-neg", "modulo", "division",
+     "seven", "eight", "nine", "multiplication", 
+     "four", "five", "six", "substraction",
+     "one", "two", "three", "addition",
+     "clear", "zero", "decimal", "equal"
+];
+
 const operators = ["%", "/", "*", "-", "+"];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -23,7 +32,7 @@ const calculatorFunctions = {
 const createInputButtons = (numOfButtons) => {
     for(let i = 0; i < numOfButtons; i++){
         inputFrame.innerHTML += 
-        `<button class ="buttons" type="button"></button>`;
+        `<button class ="buttons" id="btn-" type="button"></button>`;
     }
 
     return buttons = document.querySelectorAll(".buttons");
@@ -32,7 +41,7 @@ const createInputButtons = (numOfButtons) => {
 const nameInputButtons = () => {
     for(let i = 0; i < 20; i++){
         buttons[i].innerText = buttonText[i];
-        buttons[i].id = buttonText[i];
+        buttons[i].id += buttonIdentification[i];
         buttons[i].value = buttonText[i];
     }
 };
@@ -74,11 +83,11 @@ createInputButtons(20);
 nameInputButtons();
 
 buttons.forEach(button => {
-    if(numbers.includes(button.id)){
+    if(numbers.includes(button.value)){
         button.addEventListener("click", () => {
             outputFrame.innerText += button.value;
         });
-    } else if(operators.includes(button.id)){
+    } else if(operators.includes(button.value)){
         button.addEventListener("click", () => {
         if(checkForCorrectInput(outputFrame) === 2){
             executeCalculation();
@@ -86,12 +95,12 @@ buttons.forEach(button => {
             const stringToArray = outputFrame.innerText.split("");
             stringToArray.pop();
             outputFrame.innerText = stringToArray.join("");
-        }
+        } 
         outputFrame.innerText += button.value;
         });
-    } else if(button.id === "="){
+    } else if(button.value === "="){
         button.addEventListener("click", () => executeCalculation());
-    } else if(button.id === "AC"){
+    } else if(button.value === "AC"){
         button.addEventListener("click", () => resetCalculator());
     }
 })
