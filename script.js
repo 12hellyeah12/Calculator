@@ -1,6 +1,7 @@
 const inputFrame = document.querySelector("#input-frame");
 const outputFrame = document.querySelector("#output-frame");
 const inputHistory = document.querySelector("#input-history");
+let clickCount = 0;
 
 const buttonText = [
     "", "+/-", "%", "/",
@@ -80,8 +81,21 @@ const checkForCorrectInput = (button, input) => {
         stringToArray.pop();
         input.innerText = stringToArray.join("");
     }
+
     input.innerText += button.value;
 };
+
+const toggleOperatorButtons = () => {
+    buttons.forEach(button => {
+        if(operators.includes(button.value)){
+            if(clickCount > 0){
+                button.removeAttribute("disabled", "");
+            } else{
+            button.setAttribute("disabled", "");
+            }
+        }
+    });
+}
 
 createInputButtons(20);
 nameInputButtons();
@@ -89,14 +103,20 @@ nameInputButtons();
 buttons.forEach(button => {
     if(numbers.includes(button.value)){
         button.addEventListener("click", () => {
+            clickCount++;
             outputFrame.innerText += button.value;
+            toggleOperatorButtons();
         });
     } else if(operators.includes(button.value)){
         button.addEventListener("click", () => checkForCorrectInput(button, outputFrame));
     } else if(button.value === "="){
         button.addEventListener("click", () => executeCalculation());
     } else if(button.value === "AC"){
-        button.addEventListener("click", () => resetCalculator());
+        button.addEventListener("click", () => {
+            resetCalculator();
+            clickCount = 0;
+            toggleOperatorButtons();
+        });
     }
 })
 
