@@ -65,11 +65,25 @@ div{
     height: calc(100% / 5);
 }
 
+#btn-equal, #btn-clear, #btn-pos-neg{
+    background-color: turquoise;
+}
+
+#btn-equal:active, #btn-clear:active, #btn-pos-neg:active{
+    background-color: #00ced1;
+}
+
+#btn-zero:active, #btn-one:active, #btn-two:active, #btn-three:active, #btn-four:active, #btn-five:active,
+#btn-six:active, #btn-seven:active, #btn-eight:active, #btn-nine:active, #btn-decimal:active{
+    background-color: darkgrey;
+}
+
 #btn-modulo, #btn-division, #btn-multiplication, #btn-substraction, #btn-addition{
     background-color: orange;
 }
 
-#btn-modulo:active, #btn-division:active, #btn-multiplication:active, #btn-substraction:active, #btn-addition:active{
+#btn-modulo:active, #btn-division:active, #btn-multiplication:active, #btn-substraction:active, 
+#btn-addition:active{
     background-color: #ff8c00;
 }
 
