@@ -30,26 +30,9 @@ const calculatorFunctions = {
     "%": (num1, num2) => num1 % num2,
 };
 
-const createInputButtons = (numOfButtons) => {
-    for(let i = 0; i < numOfButtons; i++){
-        inputFrame.innerHTML += 
-        `<button class ="buttons" id="btn-" type="button"></button>`;
-    }
-
-    return buttons = document.querySelectorAll(".buttons");
-};
-
-const nameInputButtons = () => {
-    for(let i = 0; i < 20; i++){
-        buttons[i].innerText = buttonText[i];
-        buttons[i].id += buttonIdentification[i];
-        buttons[i].value = buttonText[i];
-    }
-};
-
 const operate = (num1, operator, num2) => {
     const calc = calculatorFunctions[operator](Number(num1), Number(num2));
-    outputFrame.innerText = calc;
+    outputFrame.innerText = calc.toFixed(2);
 };
 
 const resetCalculator = () => {
