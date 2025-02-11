@@ -3,14 +3,6 @@ const outputFrame = document.querySelector("#output-frame");
 const inputHistory = document.querySelector("#input-history");
 let clickCount = 0;
 
-const buttonText = [
-    "", "+/-", "%", "/",
-     "7", "8", "9", "*", 
-     "4", "5", "6", "-",
-     "1", "2", "3", "+",
-     "AC", "0", ".", "="
-];
-
 const buttonIdentification = [
     "empty", "pos-neg", "modulo", "division",
      "seven", "eight", "nine", "multiplication", 
@@ -19,8 +11,12 @@ const buttonIdentification = [
      "clear", "zero", "decimal", "equal"
 ];
 
-const operators = ["%", "/", "*", "-", "+"];
-const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const operators = [
+    "btn-modulo", "btn-division", "btn-multiplication", "btn-substraction", "btn-addition"
+];
+const numbers = [
+    "btn-0", "btn-1", "btn-2", "btn-3", "btn-4", "btn-5", "btn-6", "btn-7", "btn-8", "btn-9"
+];
 
 const calculatorFunctions = {
     "+": (num1, num2) => num1 + num2,
@@ -85,34 +81,14 @@ const toggleOperatorButtons = () => {
     });
 }
 
-createInputButtons(20);
-nameInputButtons();
-toggleOperatorButtons();
-
-buttons.forEach(button => {
-    if(numbers.includes(button.value)){
-        button.addEventListener("click", () => {
-            clickCount++;
-            outputFrame.innerText += button.value;
-            toggleOperatorButtons();
-        });
-    } else if(operators.includes(button.value)){
-        button.addEventListener("click", () => {
-            checkForCorrectInput(button, outputFrame);
-            outputFrame.innerText += button.value;
-        });
-    } else if(button.value === "="){
-        button.addEventListener("click", () => executeCalculation());
-    } else if(button.value === "AC"){
-        button.addEventListener("click", () => {
-            resetCalculator();
-            clickCount = 0;
-            toggleOperatorButtons();
-        });
-    } else if(button.value === "+/-"){
-        button.addEventListener("click", () => {
-            checkForCorrectInput(button, outputFrame);
-        });
+inputFrame.addEventListener("click", (event) => {
+    let output;
+    if(numbers.includes(event.target.id)){
+        output = event.target.textContent;
     }
-})
+    else if(operators.includes(event.target.id)){
+        
+    }
+    outputFrame.textContent = output;
+});
 
