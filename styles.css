@@ -73,8 +73,8 @@ div{
     background-color: #00ced1;
 }
 
-#btn-zero:active, #btn-one:active, #btn-two:active, #btn-three:active, #btn-four:active, #btn-five:active,
-#btn-six:active, #btn-seven:active, #btn-eight:active, #btn-nine:active, #btn-decimal:active{
+#btn-0:active, #btn-1:active, #btn-2:active, #btn-3:active, #btn-4:active, #btn-5:active,
+#btn-6:active, #btn-7:active, #btn-8:active, #btn-9:active, #btn-decimal:active{
     background-color: darkgrey;
 }
 

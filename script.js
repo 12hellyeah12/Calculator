@@ -1,7 +1,9 @@
 const inputFrame = document.querySelector("#input-frame");
 const outputFrame = document.querySelector("#output-frame");
 const inputHistory = document.querySelector("#input-history");
-let clickCount = 0;
+let output;
+let inputNumbers = [];
+let operator;
 
 const buttonIdentification = [
     "empty", "pos-neg", "modulo", "division",
@@ -28,27 +30,28 @@ const calculatorFunctions = {
 
 const operate = (num1, operator, num2) => {
     const calc = calculatorFunctions[operator](Number(num1), Number(num2));
-    outputFrame.innerText = calc.toFixed(2);
+    inputNumbers = [];
+    inputNumbers[0] = calc;
+    return Math.round(calc * 100) / 100;
 };
 
 const resetCalculator = () => {
-    outputFrame.innerText = "";
-    inputHistory.innerText = "";
+    outputFrame.textContent = "";
+    output = "";
+    inputNumbers = [];
+    operator = "";
 };
 
-const executeCalculation = () => {
-    const operationsArray = outputFrame.innerText.split("");
-    const indexOfOperator = operationsArray.findIndex((element, index) => {
-        if(index > 0){
-        return operators.includes(element);
-        }
-    });
+const saveInput = (event) => {
+    if(operators.includes(event.target.id)){
+        operator = event.target.textContent;
+    }
 
-    const numberOne = operationsArray.splice(0, indexOfOperator).join("");
-    const operator = operationsArray.splice(0, 1);
-    const numberTwo = operationsArray.splice(0).join("");
-
-    operate(numberOne, operator, numberTwo);
+    if(!inputNumbers[0]){
+        inputNumbers[0] = output;
+    } else if(inputNumbers[0]){
+        inputNumbers[1] = output;
+    }
 }
 
 const checkForCorrectInput = (button, input) => {
@@ -82,13 +85,23 @@ const toggleOperatorButtons = () => {
 }
 
 inputFrame.addEventListener("click", (event) => {
-    let output;
     if(numbers.includes(event.target.id)){
         output = event.target.textContent;
+
+    } else if(operators.includes(event.target.id)){
+        saveInput(event);
+        if(inputNumbers[0] && inputNumbers[1]){
+            output = operate(inputNumbers[0], operator, inputNumbers[1]);
+        }
+
+    } else if(event.target.id === "btn-equal"){
+        saveInput(event);
+        output = operate(inputNumbers[0], operator, inputNumbers[1]);
+
+    } else if(event.target.id === "btn-clear"){
+        resetCalculator();
     }
-    else if(operators.includes(event.target.id)){
-        
-    }
+
     outputFrame.textContent = output;
 });
 
