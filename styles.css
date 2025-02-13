@@ -82,9 +82,8 @@ div{
     background-color: orange;
 }
 
-#btn-modulo:active, #btn-division:active, #btn-multiplication:active, #btn-substraction:active, 
-#btn-addition:active{
-    background-color: #ff8c00;
+.clicked{
+    background-color: #ff8c00 !important;
 }
 
 #btn-empty{
