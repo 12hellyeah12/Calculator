@@ -87,6 +87,9 @@ inputFrame.addEventListener("click", (event) => {
 
     } else if(event.target.id === "btn-decimal" && !outputFrame.textContent.includes(".")){
         saveNumber(event);
+
+    } else if(event.target.id === "btn-pos-neg" && !input.operator && !input.number2){
+        operate(input.number1, "*", "-1");
     }
 });
 
