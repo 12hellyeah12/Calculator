@@ -1,6 +1,8 @@
 const inputFrame = document.querySelector("#input-frame");
 const outputFrame = document.querySelector("#output-frame");
 const inputHistory = document.querySelector("#input-history");
+const backspaceButton = document.querySelector("#btn-backspace");
+const clearButton = document.querySelector("#btn-clear");
 
 const input = {
     number1: "",
@@ -36,6 +38,7 @@ const resetCalculator = () => {
     outputFrame.textContent = "";
     input.number1 = "";
     isClicked[0].classList.remove("clicked");
+    isClicked.shift;
     input.number2 = "";
     input.operator = "";
     
@@ -55,18 +58,48 @@ const saveOperator = (event) => {
 }
 
 const saveNumber = (event) => {
-    if(!input.operator){
-        input.number1 += event.target.textContent;
-        outputFrame.textContent = input.number1;
-    } else if(input.operator){
+    if(numbers.includes(event.target.id)){
+        if(!input.operator){
+            input.number1 += event.target.textContent;
+            outputFrame.textContent = input.number1;
+
+        } else if(input.operator){
         input.number2 += event.target.textContent;
         outputFrame.textContent = input.number2;
+        }
+    }
+
+    if(event.target.id === "btn-backspace" || event.target.id === "backspace-icon"){
+        const outputArr = outputFrame.textContent.split("");
+        outputArr.pop();
+        const outputString = outputArr.join("");
+
+            if(!input.operator){
+                input.number1 = outputString;
+                outputFrame.textContent = input.number1;
+
+            } else if(input.operator){
+            input.number2 = outputString;
+            outputFrame.textContent = input.number2;
+            }
     }
 };
 
+const changeAllClear = () => {
+        backspaceButton.classList.remove("invisible");
+        clearButton.classList.add("invisible"); 
+};
+
+const changeBackspace = () => {
+    backspaceButton.classList.add("invisible");
+    clearButton.classList.remove("invisible");  
+};
+
 inputFrame.addEventListener("click", (event) => {
+    
     if(numbers.includes(event.target.id)){
         saveNumber(event);
+        changeAllClear();
 
     } else if(operators.includes(event.target.id) && input.number1){
         if(input.number1 && input.number2){
@@ -90,6 +123,13 @@ inputFrame.addEventListener("click", (event) => {
 
     } else if(event.target.id === "btn-pos-neg" && !input.operator && !input.number2){
         operate(input.number1, "*", "-1");
+
+    } else if(event.target.id === "btn-backspace" || event.target.id === "backspace-icon"){
+        saveNumber(event);
+        if(!input.number1){
+            changeBackspace();
+        } else if(!input.number2 && input.operator){
+            changeBackspace();
+        }
     }
 });
-

@@ -65,11 +65,11 @@ div{
     height: calc(100% / 5);
 }
 
-#btn-equal, #btn-clear, #btn-pos-neg{
+#btn-equal, #btn-clear, #btn-pos-neg, #btn-backspace{
     background-color: turquoise;
 }
 
-#btn-equal:active, #btn-clear:active, #btn-pos-neg:active{
+#btn-equal:active, #btn-clear:active, #btn-pos-neg:active, #btn-backspace:active{
     background-color: #00ced1;
 }
 
@@ -89,4 +89,8 @@ div{
 #btn-empty{
     background-color: transparent;
     border: none;
+}
+
+.invisible{
+    display: none;
 }
