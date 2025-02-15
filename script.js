@@ -37,11 +37,12 @@ const operate = (num1, operator, num2) => {
 const resetCalculator = () => {
     outputFrame.textContent = "";
     input.number1 = "";
-    isClicked[0].classList.remove("clicked");
-    isClicked.shift;
     input.number2 = "";
     input.operator = "";
-    
+    if(isClicked[0]){
+    isClicked[0].classList.remove("clicked");
+    isClicked.shift();
+    }
 };
 
 const saveOperator = (event) => {
@@ -96,7 +97,6 @@ const changeBackspace = () => {
 };
 
 inputFrame.addEventListener("click", (event) => {
-    
     if(numbers.includes(event.target.id)){
         saveNumber(event);
         changeAllClear();
@@ -109,11 +109,10 @@ inputFrame.addEventListener("click", (event) => {
             saveOperator(event);
         }
         
-    } else if(event.target.id === "btn-equal" && input.number2){
-        if(input.number1 && input.number2){
+    } else if(event.target.id === "btn-equal" && input.number1 && input.number2){
             operate(input.number1, input.operator, input.number2);
             isClicked[0].classList.remove("clicked");
-        }
+            isClicked.shift();
 
     } else if(event.target.id === "btn-clear"){
         resetCalculator();
@@ -126,9 +125,7 @@ inputFrame.addEventListener("click", (event) => {
 
     } else if(event.target.id === "btn-backspace" || event.target.id === "backspace-icon"){
         saveNumber(event);
-        if(!input.number1){
-            changeBackspace();
-        } else if(!input.number2 && input.operator){
+        if(!input.number1 || !input.number2 && input.operator){
             changeBackspace();
         }
     }
