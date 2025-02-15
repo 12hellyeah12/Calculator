@@ -1,6 +1,5 @@
 const inputFrame = document.querySelector("#input-frame");
 const outputFrame = document.querySelector("#output-frame");
-const inputHistory = document.querySelector("#input-history");
 const backspaceButton = document.querySelector("#btn-backspace");
 const clearButton = document.querySelector("#btn-clear");
 
@@ -23,7 +22,7 @@ const calculatorFunctions = {
     "-": (num1, num2) => num1 - num2,
     "*": (num1, num2) => num1 * num2,
     "/": (num1, num2) => num1 / num2,
-    //"%": (num1, num2) => num1 % num2,
+    "%": (num1, num2) => num1 % num2,
 };
 
 const showError = (message) => {

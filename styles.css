@@ -31,19 +31,10 @@ div{
     border-radius: 5%;
 }
 
-#input-history{
-    width: 94%;
-    height: 7%;
-    margin-top: 3%;
-    text-align: right;
-    color: lightgrey;
-    font-size: 3rem;
-}
-
 #output-frame{
-    height: 7%;
+    height: 14%;
     width: 94%;
-    margin-top: 3%;
+    margin-top: 6%;
     color: white;
     font-weight: bold;
     font-size: 3rem;
