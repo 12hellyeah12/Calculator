@@ -23,10 +23,20 @@ const calculatorFunctions = {
     "-": (num1, num2) => num1 - num2,
     "*": (num1, num2) => num1 * num2,
     "/": (num1, num2) => num1 / num2,
-    "%": (num1, num2) => num1 % num2,
+    //"%": (num1, num2) => num1 % num2,
 };
 
+const showError = (message) => {
+    outputFrame.textContent = message;
+    outputFrame.style.color = "red"; 
+}
+
 const operate = (num1, operator, num2) => {
+    if (!calculatorFunctions[operator]){
+        showError("Error: Ungültiger Operator!");
+        setTimeout(resetCalculator, 1000);
+        return;
+    }
     const calc = calculatorFunctions[operator](Number(num1), Number(num2));
     input.number1 = Math.round(calc * 100) / 100;
     input.number2 = "";
@@ -35,12 +45,14 @@ const operate = (num1, operator, num2) => {
 };
 
 const resetCalculator = () => {
+    outputFrame.style.color = "white";
     outputFrame.textContent = "";
     input.number1 = "";
     input.number2 = "";
     input.operator = "";
     isClicked[0]?.classList.remove("clicked");
     isClicked?.shift();
+    changeBackspace();
 };
 
 const saveOperator = (event) => {
