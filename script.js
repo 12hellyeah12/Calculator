@@ -39,10 +39,8 @@ const resetCalculator = () => {
     input.number1 = "";
     input.number2 = "";
     input.operator = "";
-    if(isClicked[0]){
-    isClicked[0].classList.remove("clicked");
-    isClicked.shift();
-    }
+    isClicked[0]?.classList.remove("clicked");
+    isClicked?.shift();
 };
 
 const saveOperator = (event) => {
@@ -104,8 +102,8 @@ inputFrame.addEventListener("click", (event) => {
         
     } else if(event.target.id === "btn-equal" && input.number1 && input.number2){
             operate(input.number1, input.operator, input.number2);
-            isClicked[0].classList.remove("clicked");
-            isClicked.shift();
+            isClicked[0]?.classList.remove("clicked");
+            isClicked?.shift();
 
     } else if(event.target.id === "btn-clear"){
         resetCalculator();
