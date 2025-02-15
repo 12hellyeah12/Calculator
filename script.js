@@ -63,25 +63,18 @@ const saveNumber = (event) => {
         if(!input.operator){
             input.number1 += event.target.textContent;
             outputFrame.textContent = input.number1;
-
         } else if(input.operator){
-        input.number2 += event.target.textContent;
-        outputFrame.textContent = input.number2;
+            input.number2 += event.target.textContent;
+            outputFrame.textContent = input.number2;
         }
     }
 
     if(event.target.id === "btn-backspace" || event.target.id === "backspace-icon"){
-        const outputArr = outputFrame.textContent.split("");
-        outputArr.pop();
-        const outputString = outputArr.join("");
-
-            if(!input.operator){
-                input.number1 = outputString;
-                outputFrame.textContent = input.number1;
-
-            } else if(input.operator){
-            input.number2 = outputString;
-            outputFrame.textContent = input.number2;
+        outputFrame.textContent = outputFrame.textContent.slice(0, -1);
+            if (!input.operator){
+                input.number1 = outputFrame.textContent;
+            } else {
+                input.number2 = outputFrame.textContent;
             }
     }
 };
